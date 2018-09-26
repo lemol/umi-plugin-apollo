@@ -25,6 +25,6 @@ export default function(api, opts = {}) {
     resolved: join(__dirname, './schema'),
   });
 
-  api.addRuntimePlugin(join(__dirname, './runtime'));
-  api.addRuntimePluginKey('apollo');
+  // api.addRuntimePlugin(join(__dirname, './runtime'));
+  // api.addRuntimePluginKey('apollo');
 }

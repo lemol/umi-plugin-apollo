@@ -6,8 +6,8 @@
   "scripts": {
     "pub": "umi test --coverage && npm run build && npm publish",
     "test": "echo 'No tests yet.'",
-    "dev": "babel src --watch --presets=es2015,stage-1 --out-dir ./lib",
-    "build": "babel src --presets=es2015,stage-1 --out-dir ./lib"
+    "dev": "babel src --watch --presets=es2015,stage-0 --out-dir ./lib",
+    "build": "babel src --out-dir ./lib"
   },
   "repository": {
     "type": "git",
@@ -34,8 +34,9 @@
     "react-apollo": "^2.1.11"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-1": "^6.24.1"
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-preset-latest-node": "^2.0.2"
   }
 }

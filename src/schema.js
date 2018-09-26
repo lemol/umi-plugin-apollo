@@ -22,8 +22,8 @@ export default api => {
       const typeName = capitalizeFirstLetter(name);
 
       this.fs.copyTpl(
-        join(absTemplatePath, 'model.js'),
-        join(paths.absSrcPath, paths.pagesPath, `schema.js`),
+        join(absTemplatePath, 'schema.js'),
+        join(paths.absPagesPath, `schema.js`),
         {
           name,
           typeName,
