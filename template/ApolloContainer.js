@@ -7,12 +7,11 @@ import { withClientState } from 'apollo-link-state';
 // import httpLink from './http-link';
 // import { resolvers, defaults } from './local.resolvers';
 // import localTypeDefs from './local.graphql';
+import pageRootTypeDefs from './PageRootSchema';
+import * as pageRootResolver from './PageRootResolver';
 
 const defaults = {
-  page: {
-    __typename: 'Page',
-    _empty: 'empty',
-  },
+  page: pageRootResolver.defaults,
 };
 
 const resolvers = {}
