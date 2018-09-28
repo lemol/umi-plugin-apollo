@@ -22,7 +22,7 @@ export const resolvers = {
 
       const previous = cache.readQuery({ query });
       const data = _.setIn(previous, ['page', '<%= pageName %>', 'title'], value);
-      cache.writeQuery({ query });
+      cache.writeData({ query, data });
 
       return data.page.<%= pageVarName %>;
     }

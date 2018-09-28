@@ -1,9 +1,10 @@
 import { print } from 'graphql/language/printer';
 import gql from 'graphql-tag';
+// <% LoadImportPageSchemas %>
 
 const pageRootSchema = gql`
   type Page {
-    _active: String
+    _selected: String
   }
 
   extend type Query {
@@ -17,4 +18,5 @@ const pageRootSchema = gql`
 
 export default gql`
   ${print(pageRootSchema)}
+  # <% LoadPrintPageSchemas %>
 `;

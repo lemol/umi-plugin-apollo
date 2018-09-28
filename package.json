@@ -33,6 +33,7 @@
     "apollo-link-error": "^1.1.1",
     "apollo-link-http": "^1.5.5",
     "apollo-link-state": "^0.4.2",
+    "globby": "^8.0.1",
     "graphql": "0.13.0",
     "graphql-tag": "^2.9.2",
     "graphql-tools": "^4.0.0",

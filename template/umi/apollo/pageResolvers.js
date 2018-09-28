@@ -1,32 +1,33 @@
-import { merge } from 'lodash';
+import { merge, set } from 'lodash';
+import gql from 'graphql-tag';
 // <% LoadImportPageResolvers %>
-// import { resolvers as page1Resolvers, defaults as page1Defaults } from '../page/page1/resolver.js';
-
 
 const pageRootDefaults = {
-  __typename: 'Page',
-  _active: null,
-}
+  page: {
+    __typename: 'Page',
+    _selected: null,
+  },
+};
 
 const pageRootResolvers = {
   Mutation: {
     setActivePage: (_, { value }, { cache }) => {
       const query = gql`
         query ActivePage {
-          page {
-            _active
+          page @client {
+            _selected
           }
         }
       `;
 
       const previous = cache.readQuery({ query });
-      const data = _.setIn(previous, ['page', '_active'], value);
-      cache.writeQuery({ data });
+      const data = set(previous, ['page', '_selected'], value);
+      cache.writeData({ query, data });
 
-      return data.page._active;
+      return data.page._selected;
     }
   }
-}
+};
 
 export const defaults = merge(
   pageRootDefaults
