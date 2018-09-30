@@ -18,7 +18,8 @@
     "apollo",
     "graphql",
     "react",
-    "plugin"
+    "plugin",
+    "umi-plugin"
   ],
   "author": "Leza Lutonda <lemol-c@hotmail.com> (https://github.com/lemol)",
   "license": "MIT",

@@ -21,8 +21,6 @@ export default function(api, opts = {}) {
     joinApolloTemplatePath: joinApolloTemplatePath(api),
   }
 
-  console.log(apolloFiles);
-
   api.onGenerateFiles(() => {
     const apolloPath = joinApolloPath(api)('');
     if (!existsSync(apolloPath)) {

@@ -20,12 +20,24 @@ export default api => {
         throw new Error(`umi generate apollo:page does not work when config.routes exists`);
       }
 
-      const path = getPath(this.args[0].toString());
+      const pagePath = this.args[0].toString();
+      const path = getPath(pagePath);
       const name = getName(path);
 
       const pageName = name;
       const pageTypeName = `${capitalizeFirstLetter(name)}Page`;
       const pageVarName = `${name}Page`;
+
+      this.fs.copyTpl(
+        join(absTemplatePath, 'page.js'),
+        join(paths.absPagesPath, `${pagePath}.js`),
+        {
+          pagePath,
+          pageName,
+          pageTypeName,
+          pageVarName,
+        },
+      );
 
       this.fs.copyTpl(
         join(absTemplatePath, 'schema.js'),
