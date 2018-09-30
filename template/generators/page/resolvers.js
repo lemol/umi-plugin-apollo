@@ -24,7 +24,7 @@ export const resolvers = {
       const data = _.setIn(previous, ['page', '<%= pageName %>', 'title'], value);
       cache.writeData({ query, data });
 
-      return data.page.<%= pageVarName %>;
+      return data.page.<%= pageVarName %>.title;
     }
   }
 };

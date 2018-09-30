@@ -30,8 +30,13 @@ const pageRootResolvers = {
 };
 
 export const defaults = merge(
-  pageRootDefaults
-  // <% LoadMergeDefaults %>
+  pageRootDefaults,
+  {
+    page: merge(
+      {}
+      // <% LoadMergeDefaults %>
+    )
+  }
 );
 
 export const resolvers = merge(
