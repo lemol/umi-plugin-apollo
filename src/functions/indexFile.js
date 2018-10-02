@@ -2,11 +2,10 @@ import { join } from 'path';
 import { readFileSync, writeFileSync } from 'fs';
 
 export default (api, bag) => api.onGenerateFiles(() => {
-  const path = bag.joinApolloPath('index.js');
-  const templatePath = bag.joinApolloTemplatePath('index.js'); // join(__dirname, '../../template/umi/apollo/index.js');
+  const indexPath = bag.joinApolloPath('index.js');
+  const templatePath = bag.joinApolloTemplatePath('index.js');
 
-  const template = readFileSync(templatePath, 'utf-8');
-  const content = template;
-
-  writeFileSync(path, content);
+  const indexTemplate = readFileSync(templatePath, 'utf-8');
+  const indexContent = indexTemplate;
+  writeFileSync(indexPath, indexContent);
 });

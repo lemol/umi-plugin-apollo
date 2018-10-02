@@ -7,9 +7,7 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link';
 import { withClientState } from 'apollo-link-state';
-// import httpLink from './http-link';
-// import { resolvers, defaults } from './local.resolvers';
-// import localTypeDefs from './local.graphql';
+import remoteLink from './remote-link';
 import pageTypeDefs from './pageSchema';
 import { resolvers as pageResolvers, defaults as pageDefaults } from './pageResolvers';
 
@@ -37,7 +35,7 @@ const resolvers = merge(mainResolvers, pageResolvers);
 const cache = new InMemoryCache();
 const clientStateLink = withClientState({ resolvers, defaults, cache, typeDefs });
 
-const link = ApolloLink.from([clientStateLink /*, httpLink */]);
+const link = ApolloLink.from([clientStateLink, remoteLink]);
 
 const client = new ApolloClient({
   link,

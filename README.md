@@ -1,11 +1,13 @@
 # umi-plugin-apollo
 
-WIP: Apollo graphql plugin for umijs.
+[![NPM version](https://img.shields.io/npm/v/umi-plugin-apollo.svg?style=flat)](https://npmjs.org/package/umi-plugin-apollo)
+
+WIP: apollo graphql plugin for umijs.
 
 ### Install
 
 ```bash
-yarn add umi-plugin-apollo    # or npm install --save umi-plugin-apollo
+$ yarn add umi-plugin-apollo    # OR npm install --save umi-plugin-apollo
 ```
 
 ### Setup
@@ -20,11 +22,11 @@ export default {
     ['umi-plugin-react', {
       routes: {
         exclude: [
-          /schema\.js/,
-          /resolvers\.js/,
+          /schema\.(js|jsx|ts|tsx)$/,
+          /resolvers\.(js|jsx|ts|tsx)$/,
         ],
       },
-      // other plugin-react options
+      // other umi-plugin-react options
     }],
     ['umi-plugin-apollo'],
   ]

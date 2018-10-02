@@ -15,6 +15,7 @@
   },
   "keywords": [
     "umi",
+    "umijs",
     "apollo",
     "graphql",
     "react",
@@ -33,17 +34,18 @@
     "apollo-link": "^1.2.3",
     "apollo-link-error": "^1.1.1",
     "apollo-link-http": "^1.5.5",
+    "apollo-link-schema": "^1.1.1",
     "apollo-link-state": "^0.4.2",
     "globby": "^8.0.1",
-    "graphql": "0.13.0",
-    "graphql-tag": "^2.9.2",
+    "graphql": "14.0.2",
+    "graphql-tag": "^2.10.0",
     "graphql-tools": "^4.0.0",
     "lodash": "^4.17.11",
-    "react-apollo": "^2.2.1"
+    "react-apollo": "^2.2.4"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.0",
-    "@babel/core": "^7.1.0",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
     "babel-preset-latest-node": "^2.0.2"
   },

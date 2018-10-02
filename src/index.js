@@ -5,6 +5,7 @@ import { parseApolloFiles } from './functions/utils';
 import generateIndexFile from './functions/indexFile';
 import generatePageResolversFile from './functions/pageResolversFile';
 import generatePageSchemaFile from './functions/pageSchemaFile';
+import generateLinkFile from './functions/linkFile';
 
 const joinApolloPath = api => path => join(api.paths.tmpDirPath, 'apollo', path);
 const joinApolloTemplatePath = __ => path => join(__dirname, '../template/umi/apollo', path);
@@ -31,6 +32,7 @@ export default function(api, opts = {}) {
   generateIndexFile(api, bag);
   generatePageSchemaFile(api, bag);
   generatePageResolversFile(api, bag);
+  generateLinkFile(api, bag);
 
   api.addRendererWrapperWithComponent('./apollo/index');
 
@@ -40,6 +42,7 @@ export default function(api, opts = {}) {
     'apollo-link',
     'apollo-link-error',
     'apollo-link-http',
+    'apollo-link-schema',
     'apollo-link-state',
     'graphql',
     'graphql-tag',
