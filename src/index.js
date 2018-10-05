@@ -10,11 +10,11 @@ import generateLinkFile from './functions/linkFile';
 const joinApolloPath = api => path => join(api.paths.tmpDirPath, 'apollo', path);
 const joinApolloTemplatePath = __ => path => join(__dirname, '../template/umi/apollo', path);
 
-export default function(api, opts = {}) {
+export default function (api, opts = {}) {
   const apolloFiles = parseApolloFiles(api);
   const schemas = apolloFiles.filter(x => x.fileType === 'Schema');
   const resolvers = apolloFiles.filter(x => x.fileType === 'Resolvers');
-  
+
   const bag = {
     schemas,
     resolvers,
@@ -36,7 +36,7 @@ export default function(api, opts = {}) {
 
   api.addRendererWrapperWithComponent('./apollo/index');
 
-  api.addVersionInfo([
+  const dependencies = [
     'apollo-cache-inmemory',
     'apollo-client',
     'apollo-link',
@@ -48,8 +48,10 @@ export default function(api, opts = {}) {
     'graphql-tag',
     'graphql-tools',
     'lodash',
-    'react-apollo',  
-  ].map(pkgName => `${pkgName}@${require(`${pkgName}/package`).version}`));
+    'react-apollo',
+  ];
+
+  api.addVersionInfo(dependencies.map(pkgName => `${pkgName}@${require(`${pkgName}/package`).version}`));
 
   api.registerGenerator('apollo:page', {
     Generator: require('./commands/generate/page').default(api),

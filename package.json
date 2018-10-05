@@ -37,7 +37,7 @@
     "apollo-link-schema": "^1.1.1",
     "apollo-link-state": "^0.4.2",
     "globby": "^8.0.1",
-    "graphql": "14.0.2",
+    "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
     "graphql-tools": "^4.0.0",
     "lodash": "^4.17.11",
