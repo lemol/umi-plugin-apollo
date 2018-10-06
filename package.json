@@ -6,7 +6,8 @@
   "scripts": {
     "pub": "npm run build && npm publish",
     "test": "echo 'No tests yet.'",
-    "dev": "babel src --watch --presets=es2015,stage-0 --out-dir ./lib",
+    "start": "npm run dev",
+    "dev": "babel src --watch --out-dir ./lib",
     "build": "babel src --out-dir ./lib"
   },
   "repository": {
