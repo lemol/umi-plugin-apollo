@@ -40,13 +40,8 @@ const getImportResolvers = resolvers => resolvers.reduce(
 `, ''
 );
 
-const getMergeQueryResolvers = resolvers => resolvers.reduce(
-  (acc, act) => `${acc}, ${act.name}.Query()
-`, ''
-);
-
-const getMergeMutationResolvers = resolvers => resolvers.reduce(
-  (acc, act) => `${acc}, ${act.name}.Mutation()
+const getMergeResolvers = resolvers => resolvers.reduce(
+  (acc, act) => `${acc}, ${act.name}
 `, ''
 );
 
@@ -66,14 +61,12 @@ export default (api, bag) => api.onGenerateFiles(() => {
 
     const loadImportSchema = getImportSchema(schemaPath);
     const loadImportResolvers = getImportResolvers(resolvers);
-    const loadMergeQueryResolvers = getMergeQueryResolvers(resolvers);
-    const loadMergeMutationResolvers = getMergeMutationResolvers(resolvers);
+    const loadMergeResolvers = getMergeResolvers(resolvers);
 
     linkContent = linkContent
       .replace('// <% LoadImportSchema %>', loadImportSchema)
       .replace('// <% LoadImportResolvers %>', loadImportResolvers)
-      .replace('// <% LoadMergeQueryResolvers %>', loadMergeQueryResolvers)
-      .replace('// <% LoadMergeMutationResolvers %>', loadMergeMutationResolvers);
+      .replace('// <% LoadMergeResolvers %>', loadMergeResolvers);
   }
 
   writeFileSync(linkPath, linkContent);

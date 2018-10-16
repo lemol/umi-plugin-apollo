@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import { merge, mapValues } from 'lodash';
 import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 import { SchemaLink } from 'apollo-link-schema';
 // <% LoadImportSchema %>
@@ -7,20 +7,10 @@ console.log('Mocking HttpLink.'); // eslint-disable-line no-console
 
 const schema = makeExecutableSchema({ typeDefs });
 
-const Query = () => merge(
+const mocks = mapValues(merge(
   {}
-  // <% LoadMergeQueryResolvers %>
-);
-
-const Mutation = () => merge(
-  {}
-  // <% LoadMergeMutationResolvers %>
-);
-
-const mocks = {
-  Query,
-  Mutation,
-};
+  // <% LoadMergeResolvers %>
+), x => () => x);
 
 addMockFunctionsToSchema({ mocks, schema });
 
