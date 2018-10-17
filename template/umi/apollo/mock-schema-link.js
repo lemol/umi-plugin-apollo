@@ -5,13 +5,14 @@ import { SchemaLink } from 'apollo-link-schema';
 // <% LoadImportResolvers %>
 console.log('Mocking HttpLink.'); // eslint-disable-line no-console
 
-const schema = makeExecutableSchema({ typeDefs });
-
-const mocks = mapValues(merge(
+const resolvers = merge(
   {}
   // <% LoadMergeResolvers %>
-), x => () => x);
+);
 
-addMockFunctionsToSchema({ mocks, schema });
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+
+// const mocks = mapValues(resolvers, x => () => x);
+// addMockFunctionsToSchema({ mocks, schema });
 
 export default new SchemaLink({ schema });
