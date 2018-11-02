@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync } from 'fs';
 const isMocked = [undefined, 'true', '1', 'yes'].indexOf((process.env.MOCK || 'true').toLowerCase()) !== -1;
 
 const getSchemaPath = api => globby
-  .sync('**/schema.{gql,graphql}', {
+  .sync('**/schema.{gql,graphql}{,.js,.ts}{,x}', {
     cwd: join(api.paths.cwd, 'mock'),
   })
   .map(path => api.winPath(join(api.paths.cwd, 'mock', path)))[0];
