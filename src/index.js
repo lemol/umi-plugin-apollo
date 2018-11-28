@@ -20,6 +20,7 @@ export default function (api, opts = {}) {
     resolvers,
     joinApolloPath: joinApolloPath(api),
     joinApolloTemplatePath: joinApolloTemplatePath(api),
+    opts,
   }
 
   api.onGenerateFiles(() => {

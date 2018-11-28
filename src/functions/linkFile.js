@@ -45,6 +45,10 @@ const getMergeResolvers = resolvers => resolvers.reduce(
 `, ''
 );
 
+const getHttpLinkOptions = ({ httpLinkOptions }) => typeof httpLinkOptions === 'string'
+  ? httpLinkOptions
+  : JSON.stringify(httpLinkOptions || {});
+
 export default (api, bag) => api.onGenerateFiles(() => {
   const linkPath = bag.joinApolloPath('remote-link.js');
   const linkTemplatePath = bag.joinApolloTemplatePath(
@@ -67,6 +71,10 @@ export default (api, bag) => api.onGenerateFiles(() => {
       .replace('// <% LoadImportSchema %>', loadImportSchema)
       .replace('// <% LoadImportResolvers %>', loadImportResolvers)
       .replace('// <% LoadMergeResolvers %>', loadMergeResolvers);
+  } else {
+    const loadHttpLinkOptions  = getHttpLinkOptions(bag.opts);
+    linkContent = linkContent
+      .replace('// <% LoadHttpLinkOptions %>', loadHttpLinkOptions);
   }
 
   writeFileSync(linkPath, linkContent);
