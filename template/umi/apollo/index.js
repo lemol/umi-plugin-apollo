@@ -7,6 +7,7 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link';
 import { withClientState } from 'apollo-link-state';
+import * as options from '<%= OptionsFile %>';
 import remoteLink from './remote-link';
 import pageTypeDefs from './pageSchema';
 import { resolvers as pageResolvers, defaults as pageDefaults } from './pageResolvers';
@@ -32,16 +33,30 @@ const typeDefs = [print(mainTypeDefs), print(pageTypeDefs)];
 const defaults = merge(mainDefaults, pageDefaults);
 const resolvers = merge(mainResolvers, pageResolvers);
 
-const cache = new InMemoryCache();
-const clientStateLink = withClientState({ resolvers, defaults, cache, typeDefs });
+const cacheOptions = options.cacheOptions || {};
+const stateLinkOptions = options.stateLinkOptions || {};
+const clientOptions = options.clientOptions || {};
+const providerOptions = options.providerOptions || {};
+const extraLinks = options.extraLinks || [];
 
-const link = ApolloLink.from([clientStateLink, remoteLink]);
+const cache = options.makeCache
+  ? options.makeCache({ cacheOptions })
+  : new InMemoryCache({ ...cacheOptions });
 
-const client = new ApolloClient({
-  link,
-  cache,
-});
+const clientStateLink = options.makeClientStateLink
+  ? options.makeClientStateLink({ resolvers, defaults, cache, typeDefs, stateLinkOptions })
+  : withClientState({ resolvers, defaults, cache, typeDefs, ...stateLinkOptions });
 
-export default ({ children }) => (
-  <ApolloProvider client={client}>{children}</ApolloProvider>
-);
+const link = options.makeLink
+  ? options.makeLink({ clientStateLink, remoteLink, extraLinks })
+  : ApolloLink.from([ clientStateLink, ...extraLinks, remoteLink ]);
+
+const client = options.makeClient
+  ? options.makeClient({ link, cache, clientOptions })
+  : new ApolloClient({ link, cache, ...clientOptions });
+
+const provider = options.makeProvider
+  ? options.makeProvider({ client, providerOptions })
+  : ({ children }) => <ApolloProvider client={client} {...providerOptions}>{children}</ApolloProvider>;
+
+export default provider;

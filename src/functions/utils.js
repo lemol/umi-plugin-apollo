@@ -1,5 +1,6 @@
 import _ from 'lodash';
-import { join, basename, relative } from 'path';
+import { join, basename, relative, resolve } from 'path';
+import { readFileSync, writeFileSync } from 'fs';
 import globby from 'globby';
 
 export const capitalizeFirstLetter = x => `${x.charAt(0).toUpperCase()}${x.slice(1)}`;
@@ -58,3 +59,30 @@ export const parseApolloFiles = api => globby
       pageResolversName,
     };
   });
+
+export const getOptionsFileInternal = ({ opts, joinApolloPath, joinAbsApolloPath, joinApolloTemplatePath, joinSrcPath, joinAbsSrcPath }, { findJS, winPath }) => {
+  const apolloPath = joinAbsApolloPath('');
+  const srcPath = joinAbsSrcPath('');
+
+  if (opts.options) {
+    return relative(apolloPath, resolve(srcPath, opts.options));
+  }
+
+  const customOptionsDir = resolve(srcPath, 'options');
+  const customOptions = findJS(customOptionsDir, 'apollo');
+
+  if (customOptions) {
+    return relative(apolloPath, customOptions);
+  }
+
+  const defaultOptionsPath = joinAbsApolloPath('options.js');
+  const defaultOptionsTemplatePath = joinApolloTemplatePath('default-options.js');
+  const defaultOptionsContent = readFileSync(defaultOptionsTemplatePath, 'utf-8');
+  writeFileSync(defaultOptionsPath, defaultOptionsContent);
+
+  return relative(apolloPath, defaultOptionsPath);
+};
+
+export const getOptionsFile = (bag, api) => {
+  return `./${api.winPath(getOptionsFileInternal(bag, api))}`;
+};

@@ -1,10 +1,11 @@
 import { HttpLink } from 'apollo-link-http';
+import * as options from '<%= OptionsFile %>';
 
 const uri = process.env.GRAPHQL_URI || 'http://localhost:3000/graphql';
-const options = // <% LoadHttpLinkOptions %>
-;
+const httpLinkOptions = options.httpLinkOptions || {};
 
-export default new HttpLink({
-  uri,
-  ...options,
-});
+const httpLink = options.makeHttpLink
+  ? options.makeHttpLink({ uri, httpLinkOptions })
+  : new HttpLink({ uri, ...httpLinkOptions });
+
+export default httpLink;

@@ -6,9 +6,13 @@ import generateIndexFile from './functions/indexFile';
 import generatePageResolversFile from './functions/pageResolversFile';
 import generatePageSchemaFile from './functions/pageSchemaFile';
 import generateLinkFile from './functions/linkFile';
+import { getOptionsFile } from './functions/utils';
 
 const joinApolloPath = api => path => join(api.paths.tmpDirPath, 'apollo', path);
+const joinAbsApolloPath = api => path => join(api.paths.absTmpDirPath, 'apollo', path);
 const joinApolloTemplatePath = __ => path => join(__dirname, '../template/umi/apollo', path);
+const joinSrcPath = api => path => join(api.paths.srcPath, path);
+const joinAbsSrcPath = api => path => join(api.paths.absSrcPath, path);
 
 export default function (api, opts = {}) {
   const apolloFiles = parseApolloFiles(api);
@@ -19,9 +23,14 @@ export default function (api, opts = {}) {
     schemas,
     resolvers,
     joinApolloPath: joinApolloPath(api),
+    joinAbsApolloPath: joinAbsApolloPath(api),
     joinApolloTemplatePath: joinApolloTemplatePath(api),
+    joinSrcPath: joinSrcPath(api),
+    joinAbsSrcPath: joinAbsSrcPath(api),
     opts,
   }
+
+  bag.optionsFile = getOptionsFile(bag, api);
 
   api.onGenerateFiles(() => {
     const apolloPath = joinApolloPath(api)('');

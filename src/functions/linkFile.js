@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { join, resolve } from 'path';
 import globby from 'globby';
 import { readFileSync, writeFileSync } from 'fs';
 
@@ -45,10 +45,6 @@ const getMergeResolvers = resolvers => resolvers.reduce(
 `, ''
 );
 
-const getHttpLinkOptions = ({ httpLinkOptions }) => typeof httpLinkOptions === 'string'
-  ? httpLinkOptions
-  : JSON.stringify(httpLinkOptions || {});
-
 export default (api, bag) => api.onGenerateFiles(() => {
   const linkPath = bag.joinApolloPath('remote-link.js');
   const linkTemplatePath = bag.joinApolloTemplatePath(
@@ -72,9 +68,9 @@ export default (api, bag) => api.onGenerateFiles(() => {
       .replace('// <% LoadImportResolvers %>', loadImportResolvers)
       .replace('// <% LoadMergeResolvers %>', loadMergeResolvers);
   } else {
-    const loadHttpLinkOptions  = getHttpLinkOptions(bag.opts);
+    const optionsFile  = api.winPath(bag.optionsFile);
     linkContent = linkContent
-      .replace('// <% LoadHttpLinkOptions %>', loadHttpLinkOptions);
+      .replace('<%= OptionsFile %>', optionsFile);
   }
 
   writeFileSync(linkPath, linkContent);
