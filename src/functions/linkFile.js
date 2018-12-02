@@ -69,8 +69,11 @@ export default (api, bag) => api.onGenerateFiles(() => {
       .replace('// <% LoadMergeResolvers %>', loadMergeResolvers);
   } else {
     const optionsFile  = api.winPath(bag.optionsFile);
+    const defaultUri = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/graphql' : '/graphql';
+    const uri = bag.opts.uri || process.env.GRAPHQL_URI || defaultUri;
     linkContent = linkContent
-      .replace('<%= OptionsFile %>', optionsFile);
+      .replace('<%= OptionsFile %>', optionsFile)
+      .replace('<%= Uri %>', uri);
   }
 
   writeFileSync(linkPath, linkContent);
