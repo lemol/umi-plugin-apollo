@@ -48,7 +48,7 @@
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
-    "babel-preset-latest-node": "^2.0.2"
+    "babel-preset-latest-node": "^3.0.1"
   },
   "peerDependencies": {
     "umi-build-dev": "^1.0.3"
