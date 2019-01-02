@@ -42,16 +42,14 @@
     "graphql-tag": "^2.10.0",
     "graphql-tools": "^4.0.0",
     "lodash": "^4.17.11",
-    "react-apollo": "^2.2.4"
+    "react-apollo": "^2.2.4",
+    "umi-build-dev": "^1.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
     "babel-preset-latest-node": "^3.0.1"
-  },
-  "peerDependencies": {
-    "umi-build-dev": "^1.0.3"
   },
   "files": [
     "lib",

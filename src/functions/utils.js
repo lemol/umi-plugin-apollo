@@ -71,18 +71,40 @@ export const getOptionsFileInternal = ({ opts, joinApolloPath, joinAbsApolloPath
   const customOptionsDir = resolve(srcPath, 'options');
   const customOptions = findJS(customOptionsDir, 'apollo');
 
+  let optionsFilename;
+  let generateOptionsFile = () => undefined;
+
   if (customOptions) {
-    return relative(apolloPath, customOptions);
+    optionsFilename = relative(apolloPath, customOptions);
+    return {
+      optionsFilename,
+      generateOptionsFile,
+    };
   }
-
+  
   const defaultOptionsPath = joinAbsApolloPath('options.js');
-  const defaultOptionsTemplatePath = joinApolloTemplatePath('default-options.js');
-  const defaultOptionsContent = readFileSync(defaultOptionsTemplatePath, 'utf-8');
-  writeFileSync(defaultOptionsPath, defaultOptionsContent);
+  optionsFilename = relative(apolloPath, defaultOptionsPath);
 
-  return relative(apolloPath, defaultOptionsPath);
+  generateOptionsFile = () => {
+    const defaultOptionsTemplatePath = joinApolloTemplatePath('default-options.js');
+    const defaultOptionsContent = readFileSync(defaultOptionsTemplatePath, 'utf-8');
+    writeFileSync(defaultOptionsPath, defaultOptionsContent);
+  };
+
+  return {
+    optionsFilename,
+    generateOptionsFile,
+  };
 };
 
 export const getOptionsFile = (bag, api) => {
-  return `./${api.winPath(getOptionsFileInternal(bag, api))}`;
+  const {
+    optionsFilename,
+    generateOptionsFile,
+  } = getOptionsFileInternal(bag, api);
+
+  return {
+    optionsFilename: `./${optionsFilename}`,
+    generateOptionsFile,
+  };
 };

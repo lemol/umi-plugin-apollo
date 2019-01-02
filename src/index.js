@@ -30,13 +30,17 @@ export default function (api, opts = {}) {
     opts,
   }
 
-  bag.optionsFile = getOptionsFile(bag, api);
+  const { optionsFilename, generateOptionsFile } = getOptionsFile(bag, api);
+
+  bag.optionsFile = optionsFilename;
 
   api.onGenerateFiles(() => {
     const apolloPath = joinApolloPath(api)('');
     if (!existsSync(apolloPath)) {
       mkdirSync(apolloPath);
     }
+
+    generateOptionsFile();
   });
 
   generateIndexFile(api, bag);
@@ -67,14 +71,4 @@ export default function (api, opts = {}) {
     Generator: require('./commands/generate/page').default(api),
     resolved: join(__dirname, './commands/generate/page'),
   });
-
-  // api.changePluginOption('umi-plugin-react', {
-  //   routes: {
-  //     exclude: [
-  //       /components\//,
-  //       /schema\.js/,
-  //       /resolvers\.js/,
-  //     ],
-  //   },
-  // });
 };

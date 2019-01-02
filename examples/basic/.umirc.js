@@ -16,5 +16,6 @@ export default {
         ],
       },
     }],
+    ['../..' /* 'umi-plugin-apollo' */]
   ],
 }
