@@ -18,10 +18,15 @@ export default function (api, opts = {}) {
   const apolloFiles = parseApolloFiles(api);
   const schemas = apolloFiles.filter(x => x.fileType === 'Schema');
   const resolvers = apolloFiles.filter(x => x.fileType === 'Resolvers');
+  const mockEnv = [undefined, 'true', '1', 'yes'].indexOf((process.env.MOCK || 'true').toLowerCase()) !== -1;
+  const noMock = !!opts.noMock;
+
+  const isMocked = mockEnv && !noMock;
 
   const bag = {
     schemas,
     resolvers,
+    isMocked,
     joinApolloPath: joinApolloPath(api),
     joinAbsApolloPath: joinAbsApolloPath(api),
     joinApolloTemplatePath: joinApolloTemplatePath(api),

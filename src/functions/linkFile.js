@@ -2,8 +2,6 @@ import { join, resolve } from 'path';
 import globby from 'globby';
 import { readFileSync, writeFileSync } from 'fs';
 
-const isMocked = [undefined, 'true', '1', 'yes'].indexOf((process.env.MOCK || 'true').toLowerCase()) !== -1;
-
 const getSchemaPath = api => globby
   .sync('**/schema.{gql,graphql}{,.js,.ts}{,x}', {
     cwd: join(api.paths.cwd, 'mock'),
@@ -48,14 +46,14 @@ const getMergeResolvers = resolvers => resolvers.reduce(
 export default (api, bag) => api.onGenerateFiles(() => {
   const linkPath = bag.joinApolloPath('remote-link.js');
   const linkTemplatePath = bag.joinApolloTemplatePath(
-    isMocked ? 'mock-schema-link.js' : 'http-link.js'
+    bag.isMocked ? 'mock-schema-link.js' : 'http-link.js'
   );
 
   const linkTemplate = readFileSync(linkTemplatePath, 'utf-8');
   let linkContent = linkTemplate;
   let schemaPath;
 
-  if (isMocked) {
+  if (bag.isMocked) {
     schemaPath = getSchemaPath(api);
     const resolvers = getResolvers(api);
 
