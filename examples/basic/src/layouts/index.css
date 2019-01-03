@@ -13,3 +13,17 @@
   color: white;
   margin: 0;
 }
+
+.menu {
+  background: darkslateblue;
+  padding-bottom: 5px;
+}
+
+.menu a:link, .menu a:visited {
+  color: white;
+  text-decoration: none;
+}
+.menu a:hover {
+  color: brown;
+  text-decoration: underline;
+}

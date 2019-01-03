@@ -13,6 +13,8 @@ export default {
       routes: {
         exclude: [
           /components/,
+          /schema\.(js|jsx|ts|tsx)$/,
+          /resolvers\.(js|jsx|ts|tsx)$/,
         ],
       },
     }],
