@@ -14,14 +14,21 @@ const joinApolloTemplatePath = __ => path => join(__dirname, '../template/umi/ap
 const joinSrcPath = api => path => join(api.paths.srcPath, path);
 const joinAbsSrcPath = api => path => join(api.paths.absSrcPath, path);
 
+const defaultOpts = {
+  mock: [undefined, 'true', '1', 'yes'].indexOf((process.env.MOCK || 'true').toLowerCase()) !== -1
+};
+
 export default function (api, opts = {}) {
   const apolloFiles = parseApolloFiles(api);
   const schemas = apolloFiles.filter(x => x.fileType === 'Schema');
   const resolvers = apolloFiles.filter(x => x.fileType === 'Resolvers');
-  const mockEnv = [undefined, 'true', '1', 'yes'].indexOf((process.env.MOCK || 'true').toLowerCase()) !== -1;
-  const noMock = !!opts.noMock;
 
-  const isMocked = mockEnv && !noMock;
+  const options = {
+    ...opts,
+    ...defaultOpts,
+  };
+
+  const isMocked = options.mock;
 
   const bag = {
     schemas,
