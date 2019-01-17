@@ -1,7 +1,7 @@
 import { join, basename } from 'path';
 import _ from 'lodash';
 import assert from 'assert';
-import pageGenerator from 'umi-build-dev/lib/plugins/commands/generate/page';
+import pageGenerator from 'umi-build-dev/lib/plugins/commands/generate/generators/page';
 
 const capitalizeFirstLetter = x => `${x.charAt(0).toUpperCase()}${x.slice(1)}`;
 const getPath = fullPath => fullPath.endsWith('/index') ? fullPath.replace(/\/index$/, '') : fullPath;

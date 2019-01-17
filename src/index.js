@@ -15,7 +15,7 @@ const joinSrcPath = api => path => join(api.paths.srcPath, path);
 const joinAbsSrcPath = api => path => join(api.paths.absSrcPath, path);
 
 const defaultOpts = {
-  mock: [undefined, 'true', '1', 'yes'].indexOf((process.env.MOCK || 'true').toLowerCase()) !== -1
+  mock: ['true', '1', 'yes'].indexOf((process.env.MOCK || 'false').toLowerCase()) !== -1
 };
 
 export default function (api, opts = {}) {
@@ -24,8 +24,8 @@ export default function (api, opts = {}) {
   const resolvers = apolloFiles.filter(x => x.fileType === 'Resolvers');
 
   const options = {
-    ...opts,
     ...defaultOpts,
+    ...opts,
   };
 
   const isMocked = options.mock;
