@@ -1,7 +1,7 @@
 {
   "name": "umi-plugin-apollo",
-  "version": "0.0.4",
-  "description": "Apollo Graphql umi plugin",
+  "version": "0.0.5",
+  "description": "Umi plugin for apollo graphql client",
   "main": "lib/index.js",
   "scripts": {
     "pub": "npm run build && npm publish",

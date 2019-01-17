@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/umi-plugin-apollo.svg?style=flat)](https://npmjs.org/package/umi-plugin-apollo)
 
-WIP: apollo graphql plugin for umijs.
+Umi plugin for apollo graphql client.
 
 ### Install
 
