@@ -28,12 +28,22 @@ export default {
       },
       // other umi-plugin-react options
     }],
-    ['umi-plugin-apollo'],
+    ['umi-plugin-apollo', {/*
+      uri: 'https://my.endpoint.com/graphql',
+      mock: true
+    */}],
   ]
 }
 ```
 
 Done.
+
+## Options
+
+| name                | type                             | default                     |
+|---------------------|----------------------------------|-----------------------------|
+| uri                 | string (required in production)  | `process.env.GRAPHQL_URI`   |
+| mock                | string (optional)                | `process.env.MOCK`          |
 
 ### Generators
 

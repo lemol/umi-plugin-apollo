@@ -15,7 +15,8 @@ const joinSrcPath = api => path => join(api.paths.srcPath, path);
 const joinAbsSrcPath = api => path => join(api.paths.absSrcPath, path);
 
 const defaultOpts = {
-  mock: ['true', '1', 'yes'].indexOf((process.env.MOCK || 'false').toLowerCase()) !== -1
+  uri: process.env.GRAPHQL_URI,
+  mock: ['true', '1', 'yes'].indexOf((process.env.MOCK || 'false').toLowerCase()) !== -1,
 };
 
 export default function (api, opts = {}) {
