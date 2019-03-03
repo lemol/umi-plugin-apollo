@@ -1,20 +1,28 @@
-import { join, basename } from 'path';
+import path, { join, basename, resolve } from 'path';
 import _ from 'lodash';
 import assert from 'assert';
-import pageGenerator from 'umi-build-dev/lib/plugins/commands/generate/generators/page';
+import makePageGenerator from 'umi-build-dev/lib/plugins/commands/generate/generators/page';
 
 const capitalizeFirstLetter = x => `${x.charAt(0).toUpperCase()}${x.slice(1)}`;
 const getPath = fullPath => fullPath.endsWith('/index') ? fullPath.replace(/\/index$/, '') : fullPath;
 const getName = path => _.lowerFirst(_.startCase(path).replace(/\s/g, ''));
 
 export default api => {
-  const PageGenerator = pageGenerator(api);
+  const PageGenerator = makePageGenerator(api);
   const { paths, config } = api;
-  const absTemplatePath = join(__dirname, '../../../template/generators/page');
 
-  return class Generator extends PageGenerator {
+  return class Generator extends api.Generator {
+    constructor(args, options) {
+      super(args, options);
+      const pageGeneratorOptions = {
+        ...options,
+        resolved: require.resolve('umi-build-dev/lib/plugins/commands/generate/generators/page'),
+      };
+      this.pageGenerator = new PageGenerator(args, pageGeneratorOptions);
+    }
+
     writing() {
-      super.writing();
+      this.pageGenerator.writing();
 
       if (config.routes) {
         throw new Error(`umi generate apollo:page does not work when config.routes exists`);
@@ -23,16 +31,20 @@ export default api => {
       const pagePath = this.args[0].toString();
       const path = getPath(pagePath);
       const name = getName(path);
+      const jsxExt = this.isTypeScript ? 'tsx' : 'js';
+      const jsExt = this.isTypeScript ? 'ts' : 'js';
+      const cssExt = this.options.less ? 'less' : 'css';
 
       const pageName = name;
       const pageTypeName = `${capitalizeFirstLetter(name)}Page`;
       const pageVarName = `${name}Page`;
 
       this.fs.copyTpl(
-        join(absTemplatePath, 'page.js'),
-        join(paths.absPagesPath, `${pagePath}.js`),
+        this.templatePath('page.js'),
+        join(paths.absPagesPath, `${pagePath}.${jsxExt}`),
         {
           pagePath,
+          cssExt,
           pageName,
           pageTypeName,
           pageVarName,
@@ -40,8 +52,8 @@ export default api => {
       );
 
       this.fs.copyTpl(
-        join(absTemplatePath, 'schema.js'),
-        join(paths.absPagesPath, path, `schema.js`),
+        this.templatePath('schema.js'),
+        join(paths.absPagesPath, path, `schema.${jsExt}`),
         {
           pageName,
           pageTypeName,
@@ -50,8 +62,8 @@ export default api => {
       );
 
       this.fs.copyTpl(
-        join(absTemplatePath, 'resolvers.js'),
-        join(paths.absPagesPath, path, `resolvers.js`),
+        this.templatePath('resolvers.js'),
+        join(paths.absPagesPath, path, `resolvers.${jsExt}`),
         {
           pageName,
           pageTypeName,

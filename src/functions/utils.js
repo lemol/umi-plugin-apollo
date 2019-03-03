@@ -31,7 +31,9 @@ export const parseApolloFiles = api => globby
     const fileName = basename(path);
     const fileType = {
       'schema.js': 'Schema',
+      'schema.ts': 'Schema',
       'resolvers.js': 'Resolvers',
+      'resolvers.ts': 'Resolvers',
     }[fileName];
     const pagePath = getPagePathFromSchema(path);
 

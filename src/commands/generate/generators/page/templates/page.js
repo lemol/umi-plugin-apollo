@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import styles from './index.css';
+import styles from './index.<%= cssExt %>';
 
 const PAGE_TITLE = gql`
   query {
@@ -26,8 +26,7 @@ export default function () {
 
         return (
           <div className={styles.normal}>
-            <div className={styles.welcome} />
-            <ul className={styles.list}>
+            <ul>
               <li>Title from graphql: <b>{page.<%= pageName %>.title}</b></li>
               <li>Check <code><%= pagePath %>.js</code></li>
             </ul>

@@ -103,7 +103,7 @@ export default function (api, opts = {}) {
   api.addVersionInfo(dependencies.map(pkgName => `${pkgName}@${require(`${pkgName}/package`).version}`));
 
   api.registerGenerator('apollo:page', {
-    Generator: require('./commands/generate/page').default(api),
-    resolved: join(__dirname, './commands/generate/page'),
+    Generator: require('./commands/generate/generators/page').default(api),
+    resolved: join(__dirname, './commands/generate/generators/page/index'),
   });
 };
