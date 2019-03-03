@@ -66,6 +66,8 @@ export default {
 This file can define the following fields:
 
 ```js
+// path/to/options/file.js'
+
 export const cacheOptions = {
 };
 

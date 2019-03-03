@@ -1,3 +1,4 @@
+import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import styles from './index.<%= cssExt %>';
