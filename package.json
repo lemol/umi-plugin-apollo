@@ -1,6 +1,6 @@
 {
   "name": "umi-plugin-apollo",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Umi plugin for apollo graphql client",
   "main": "lib/index.js",
   "scripts": {
