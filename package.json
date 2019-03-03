@@ -43,6 +43,7 @@
     "graphql-tools": "^4.0.4",
     "lodash": "^4.17.11",
     "react-apollo": "^2.4.1",
+    "react-apollo-hooks": "^0.4.1",
     "umi-build-dev": "^1.4.4"
   },
   "devDependencies": {
