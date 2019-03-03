@@ -16,6 +16,7 @@ export const clientOptions = {
 export const providerOptions = {
 };
 
+export const makeClientStateLink = undefined; // : ({ resolvers, defaults, cache, typeDefs, stateLinkOptions }) => ApolloLink
 export const makeCache = undefined; // : ({ cacheOptions }) => Cache
 export const makeHttpLink = undefined; // : ({ clientStateLink, remoteLink, httpLinkOptions }) => ApolloLink
 export const makeStateLink = undefined; // : ({ resolvers, defaults, cache, typeDefs, stateLinkOptions }) => ApolloLink
