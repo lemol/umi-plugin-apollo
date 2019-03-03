@@ -24,10 +24,6 @@ export default api => {
     writing() {
       this.pageGenerator.writing();
 
-      if (config.routes) {
-        throw new Error(`umi generate apollo:page does not work when config.routes exists`);
-      }
-
       const pagePath = this.args[0].toString();
       const path = getPath(pagePath);
       const name = getName(path);
