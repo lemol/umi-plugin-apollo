@@ -30,7 +30,8 @@ export default {
     }],
     ['umi-plugin-apollo', {/*
       uri: 'https://my.endpoint.com/graphql',
-      mock: true
+      mock: true,
+      options: 'path/to/options/file',
     */}],
   ]
 }
@@ -38,12 +39,60 @@ export default {
 
 Done.
 
-## Options
+### Options
 
 | name                | type                             | default                     |
 |---------------------|----------------------------------|-----------------------------|
 | uri                 | string (required in production)  | `process.env.GRAPHQL_URI`   |
 | mock                | string (optional)                | `process.env.MOCK`          |
+| options             | string (optional)                |                             |
+
+### Options file
+
+You can create an options file that will be used to customize the creation of ApolloClient.
+Define this file on the `options` field in the plugin options: 
+
+```js
+// .umirc.js
+export default {
+  plugins: [
+    ['umi-plugin-apollo', {
+      options: 'path/to/options/file',
+    }],
+  ]
+}
+```
+
+This file can define the following fields:
+
+```js
+export const cacheOptions = {
+};
+
+export const httpLinkOptions = {
+};
+
+export const stateLinkOptions = {
+};
+
+export const extraLinks = [
+];
+
+export const clientOptions = {
+};
+
+export const providerOptions = {
+};
+
+export const makeCache = undefined; // : ({ cacheOptions }) => Cache
+export const makeHttpLink = undefined; // : ({ clientStateLink, remoteLink, httpLinkOptions }) => ApolloLink
+export const makeStateLink = undefined; // : ({ resolvers, defaults, cache, typeDefs, stateLinkOptions }) => ApolloLink
+export const makeLink = undefined; // : ({ clientStateLink, remoteLink, extraLinks }) => ApolloLink
+export const makeClient = undefined; // : ({ link, cache, clientOptions }) => ApolloClient
+export const makeProvider = undefined; // : ({ client, providerOptions }) => ReactElement (eg: ({ children }) => <ApolloProvider client={client}>{children}</ApolloProvider)
+```
+
+Please, check [this example](https://github.com/lemol/angolans-on-github/blob/master/packages/react-umi-apollo/src/options/apollo.js).
 
 ### Generators
 
