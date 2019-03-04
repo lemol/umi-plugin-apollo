@@ -66,15 +66,19 @@ export const getOptionsFileInternal = ({ opts, joinApolloPath, joinAbsApolloPath
   const apolloPath = joinAbsApolloPath('');
   const srcPath = joinAbsSrcPath('');
 
+  let generateOptionsFile = () => undefined;
+  let optionsFilename;
+
   if (opts.options) {
-    return relative(apolloPath, resolve(srcPath, opts.options));
+    optionsFilename = relative(apolloPath, resolve(srcPath, opts.options));
+    return {
+      optionsFilename,
+      generateOptionsFile,
+    };
   }
 
   const customOptionsDir = resolve(srcPath, 'options');
   const customOptions = findJS(customOptionsDir, 'apollo');
-
-  let optionsFilename;
-  let generateOptionsFile = () => undefined;
 
   if (customOptions) {
     optionsFilename = relative(apolloPath, customOptions);
