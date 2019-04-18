@@ -20,6 +20,7 @@ export default {
     }],
     ['../..', /* 'umi-plugin-apollo' */ {
       uri: 'https://countries.trevorblades.com/',
+      options: './apollo.js',
     }]
   ],
 }

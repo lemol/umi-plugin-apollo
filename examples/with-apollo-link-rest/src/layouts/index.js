@@ -8,7 +8,8 @@ function BasicLayout(props) {
       <div className={styles.menu}>
         <Link to="/">Home</Link>{' | '}
         <Link to="/continents">Continents</Link>{' | '}
-        <Link to="/todos">Todos</Link>
+        <Link to="/todos">Todos</Link>{' | '}
+        <Link to="/people-rest">People (with apollo-link-rest)</Link>
       </div>
       { props.children }
     </div>
