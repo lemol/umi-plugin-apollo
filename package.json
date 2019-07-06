@@ -30,28 +30,28 @@
   },
   "homepage": "https://github.com/lemol/umi-plugin-apollo#readme",
   "dependencies": {
-    "apollo-cache-inmemory": "^1.6.0",
-    "apollo-client": "^2.6.0",
-    "apollo-link": "^1.2.11",
-    "apollo-link-error": "^1.1.10",
-    "apollo-link-http": "^1.5.14",
-    "apollo-link-schema": "^1.2.2",
+    "apollo-cache-inmemory": "^1.6.2",
+    "apollo-client": "^2.6.3",
+    "apollo-link": "^1.2.12",
+    "apollo-link-error": "^1.1.11",
+    "apollo-link-http": "^1.5.15",
+    "apollo-link-schema": "^1.2.3",
     "apollo-link-state": "^0.4.2",
-    "globby": "^9.2.0",
-    "graphql": "^14.3.0",
+    "globby": "^10.0.1",
+    "graphql": "^14.4.2",
     "graphql-tag": "^2.10.1",
-    "graphql-tools": "^4.0.4",
+    "graphql-tools": "^4.0.5",
     "lodash": "^4.17.11",
-    "react-apollo": "^2.5.6",
+    "react-apollo": "^2.5.8",
     "react-apollo-hooks": "^0.4.5",
-    "umi-build-dev": "^1.8.4"
+    "umi-build-dev": "^1.10.9"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.0",
+    "@babel/preset-env": "^7.5.0",
     "babel-preset-latest-node": "^3.2.1",
-    "fs-extra": "^8.0.1"
+    "fs-extra": "^8.1.0"
   },
   "files": [
     "lib",
