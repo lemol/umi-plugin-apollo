@@ -75,7 +75,6 @@ const provider = options.makeProvider
   : ({ children }) => (
       <ApolloProvider client={client} {...providerOptions}>
         {/* <%= ApolloProviderChildren %> */}
-        <ApolloHooksProvider client={client}>{children}</ApolloHooksProvider>
       </ApolloProvider>
     );
 
