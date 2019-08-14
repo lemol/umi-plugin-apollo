@@ -31,6 +31,7 @@ export default {
     ['umi-plugin-apollo', {/*
       uri: 'https://my.endpoint.com/graphql',
       mock: true,
+      hooksImportFrom: 'react-apollo-hooks',
       options: 'path/to/options/file',
     */}],
   ]
@@ -41,11 +42,12 @@ Done.
 
 ### Options
 
-| name                | type                             | default                     |
-|---------------------|----------------------------------|-----------------------------|
-| uri                 | string (required in production)  | `process.env.GRAPHQL_URI`   |
-| mock                | string (optional)                | `process.env.MOCK`          |
-| options             | string (optional)                | `./options/apollo.js`       |
+| name            | type                                    | default                   |
+| --------------- | --------------------------------------- | ------------------------- |
+| uri             | string (required in production)         | `process.env.GRAPHQL_URI` |
+| mock            | string (optional)                       | `process.env.MOCK`        |
+| hooksImportFrom | `'react-apollo-hooks' | 'react-apollo'` | `'react-apollo-hooks'`    |
+| options         | string (optional)                       | `./options/apollo.js`     |
 
 ### Options file
 
@@ -116,7 +118,7 @@ Result:
 
 ### Runtime
 
-Run `npm start` then navigate to `http://localhost:8000/user`.
+Run `yarn start` (or `npm start`) then navigate to `http://localhost:8000/user`.
 
 ### Under the hood
 

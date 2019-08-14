@@ -30,8 +30,8 @@
   },
   "homepage": "https://github.com/lemol/umi-plugin-apollo#readme",
   "dependencies": {
-    "apollo-cache-inmemory": "^1.6.2",
-    "apollo-client": "^2.6.3",
+    "apollo-cache-inmemory": "^1.6.3",
+    "apollo-client": "^2.6.4",
     "apollo-link": "^1.2.12",
     "apollo-link-error": "^1.1.11",
     "apollo-link-http": "^1.5.15",
@@ -42,9 +42,9 @@
     "graphql-tag": "^2.10.1",
     "graphql-tools": "^4.0.5",
     "lodash": "^4.17.15",
-    "react-apollo": "^2.5.8",
+    "react-apollo": "^3.0.0",
     "react-apollo-hooks": "^0.5.0",
-    "umi-build-dev": "^1.10.12"
+    "umi-build-dev": "^1.10.18"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
