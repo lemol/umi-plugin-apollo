@@ -68,25 +68,6 @@ export default function(api, opts = {}) {
   generatePageResolversFile(api, bag);
   generateLinkFile(api, bag);
 
-  api.modifyDefaultConfig(memo => {
-    return {
-      ...memo,
-      urlLoaderExcludes: [...(memo.urlLoaderExcludes || []), /\.(graphql|gql)$/]
-    };
-  });
-
-  api.chainWebpackConfig(memo => {
-    memo.module
-      .rule("graphql")
-      .test(/\.(graphql|gql)$/)
-      .exclude.add(/node_modules/)
-      .end()
-      .use("graphql-loader")
-      .loader("graphql-tag/loader");
-
-    return memo;
-  });
-
   api.addRendererWrapperWithComponent("./apollo/index");
 
   const dependencies = [
