@@ -47,11 +47,11 @@
     "umi-build-dev": "^1.10.18"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "babel-preset-latest-node": "^3.2.1",
-    "fs-extra": "^8.1.0"
+    "@babel/cli": "7.5.5",
+    "@babel/core": "7.5.5",
+    "@babel/preset-env": "7.5.5",
+    "babel-preset-latest-node": "3.2.1",
+    "fs-extra": "8.1.0"
   },
   "files": [
     "lib",
