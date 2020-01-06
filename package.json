@@ -37,7 +37,7 @@
     "apollo-link-http": "^1.5.15",
     "apollo-link-schema": "^1.2.3",
     "apollo-link-state": "^0.4.2",
-    "globby": "^10.0.1",
+    "globby": "^11.0.0",
     "graphql": "^14.4.2",
     "graphql-tag": "^2.10.1",
     "graphql-tools": "^4.0.5",
